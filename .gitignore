@@ -1,0 +1,13 @@
+/.idea
+/.vscode
+/vendor
+/.phpunit.cache
+composer.phar
+composer.lock
+.DS_Store
+Thumbs.db
+.phpunit.result.cache
+phpstan.neon
+phpstan-baseline.neon
+CODE_OF_CONDUCT.md
+SECURITY.md
