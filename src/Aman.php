@@ -7,7 +7,7 @@ class Aman
     /**
      * Similar words.
      *
-     * @var array $similar
+     * @var array<string, string> $similar
      */
     private $similar = [
         'a' => '(a|a\.|a\-|4|@|Á|á|À|Â|à|Â|â|Ä|ä|Ã|ã|Å|å|α|Δ|Λ|λ)',
@@ -41,7 +41,7 @@ class Aman
     /**
      * List of words.
      *
-     * @var array $lists
+     * @var array<int, string> $lists
      */
     private $lists;
 
@@ -141,13 +141,14 @@ class Aman
      * Get from string.
      *
      * @param string $string
-     * @return array
+     * @return array<int, string>
      */
     public function words(string $string): array
     {
         $lists = [];
-        preg_replace_callback($this->lists, function (array $words) use (&$lists): void {
+        preg_replace_callback($this->lists, function (array $words) use (&$lists): string {
             $lists[] = $words[0];
+            return $words[0];
         }, $string);
 
         return $lists;
