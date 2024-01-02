@@ -150,6 +150,6 @@ class Aman
             $lists[] = $words[0];
         }, $string);
 
-        return array_reverse($lists);
+        return $lists;
     }
 }

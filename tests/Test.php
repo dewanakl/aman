@@ -5,39 +5,47 @@ use PHPUnit\Framework\TestCase;
 
 class Test extends TestCase
 {
-    public function testCheckTrue()
+    /**
+     * @var Aman
+     */
+    private $aman;
+
+    protected function setUp(): void
     {
-        $check = Aman::factory()->check('k0nt0L');
-        $this->assertTrue($check);
+        $this->aman = Aman::factory();
     }
 
-    public function testCheckFalse()
+    public function testCheck(): void
     {
-        $check = Aman::factory()->check('kantor');
-        $this->assertFalse($check);
+        $this->assertTrue($this->aman->check('This is a test with b@jIng4n word'));
+
+        $this->assertFalse($this->aman->check('This is a clean test'));
     }
 
-    public function testCheckMixedTrue()
+    public function testMasking(): void
     {
-        $check = Aman::factory()->check('k0nt0L dan m3m3k');
-        $this->assertTrue($check);
+        $maskedString = $this->aman->masking('This is a test with b@jIng4n word');
+        $this->assertSame('This is a test with ******** word', $maskedString);
+
+        $maskedStringWithHash = $this->aman->masking('This is a test with b@jIng4n word', '#');
+        $this->assertSame('This is a test with ######## word', $maskedStringWithHash);
     }
 
-    public function testMaskEquals()
+    public function testFilter(): void
     {
-        $check = Aman::factory()->masking('k0nt0L');
-        $this->assertStringContainsString($check, '******');
+        $filteredString = $this->aman->filter('This is a test with b@jIng4n word');
+        $this->assertSame('This is a test with  word', $filteredString);
     }
 
-    public function testMaskEqualsEmpty()
+    public function testWords(): void
     {
-        $check = Aman::factory()->masking('kantor');
-        $this->assertStringContainsString($check, 'kantor');
-    }
+        $filteredWords = $this->aman->words('This is a test with b@jIng4n word');
+        $this->assertSame(['b@jIng4n'], $filteredWords);
 
-    public function testMaskEqualsEmptyMixed()
-    {
-        $check = Aman::factory()->masking('kantor dan kontol');
-        $this->assertStringContainsString($check, 'kantor dan ******');
+        $filteredWords = $this->aman->words('This is a test with b@jIng4n and k3p4rat word');
+        $this->assertSame(['b@jIng4n', 'k3p4rat'], $filteredWords);
+
+        $cleanWords = $this->aman->words('This is a clean test');
+        $this->assertSame([], $cleanWords);
     }
 }
