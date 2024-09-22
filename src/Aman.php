@@ -9,7 +9,7 @@ class Aman
      *
      * @var array<string, string> $similar
      */
-    private $similar = [
+    private array $similar = [
         'a' => '(a|a\.|a\-|4|@|Á|á|À|Â|à|Â|â|Ä|ä|Ã|ã|Å|å|α|Δ|Λ|λ)',
         'b' => '(b|b\.|b\-|8|\|3|ß|Β|β)',
         'c' => '(c|c\.|c\-|Ç|ç|¢|€|<|\(|{|©)',
@@ -23,14 +23,14 @@ class Aman
         'k' => '(k|k\.|k\-|Κ|κ)',
         'l' => '(l|1\.|l\-|!|\||\]\[|]|£|∫|Ì|Í|Î|Ï)',
         'm' => '(m|m\.|m\-)',
-        'n' => '(n|n\.|n\-|η|Ν|Π)',
-        'o' => '(o|o\.|o\-|0|Ο|ο|Φ|¤|°|ø)',
+        'n' => '(n|n\.|n\-|η|Ν|Π|ñ)',
+        'o' => '(o|o\.|o\-|0|Ο|ο|Φ|¤|°|ø|ö|ó)',
         'p' => '(p|p\.|p\-|ρ|Ρ|¶|þ)',
         'q' => '(q|q\.|q\-)',
         'r' => '(r|r\.|r\-|®)',
         's' => '(s|s\.|s\-|5|\$|§)',
         't' => '(t|t\.|t\-|Τ|τ)',
-        'u' => '(u|u\.|u\-|υ|µ)',
+        'u' => '(u|u\.|u\-|υ|µ|ü|ù)',
         'v' => '(v|v\.|v\-|υ|ν)',
         'w' => '(w|w\.|w\-|ω|ψ|Ψ)',
         'x' => '(x|x\.|x\-|Χ|χ)',
@@ -43,14 +43,14 @@ class Aman
      *
      * @var array<int, string> $lists
      */
-    private $lists;
+    private array $lists;
 
     /**
      * Singleton variable.
      *
      * @var Aman|null
      */
-    public static $instance;
+    public static ?Aman $instance = null;
 
     /**
      * Init object.
@@ -60,6 +60,7 @@ class Aman
     public function __construct()
     {
         $this->lists = [];
+
         $lists = (array) @require __DIR__ . '/db/lists.php';
 
         foreach ($lists as $list) {
