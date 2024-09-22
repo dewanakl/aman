@@ -9,5 +9,3 @@ Thumbs.db
 .phpunit.result.cache
 phpstan.neon
 phpstan-baseline.neon
-CODE_OF_CONDUCT.md
-SECURITY.md
