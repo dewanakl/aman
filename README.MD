@@ -1,11 +1,11 @@
 <p align="center"><img src="https://raw.githubusercontent.com/dewanakl/aman/main/img/aman.png" width="200" alt="aman"></p>
 
 <p align="center">
-<a href="https://php.net"><img src="https://img.shields.io/packagist/dependency-v/kamu/aman/php.svg" alt="PHP Programming Language"></a>
+<a href="https://php.net"><img src="https://img.shields.io/packagist/dependency-v/kamu/aman/php.svg?color=birghtgreen" alt="PHP Programming Language"></a>
 <a href="https://packagist.org/packages/kamu/aman"><img src="https://img.shields.io/packagist/dt/kamu/aman" alt="Total Downloads"></a>
-<a href="https://github.com/dewanakl/aman"><img src="https://img.shields.io/github/repo-size/dewanakl/aman" alt="repo size"></a>
-<a href="https://packagist.org/packages/kamu/aman"><img src="https://img.shields.io/packagist/v/kamu/aman" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/kamu/aman"><img src="https://img.shields.io/packagist/l/kamu/aman" alt="License"></a>
+<a href="https://badge.dikit.biz.id"><img src="https://badge.dikit.biz.id/aman?label=views&color=brightgreen" alt="views"></a>
+<a href="https://shields.io"><img src="https://img.shields.io/github/repo-size/dewanakl/aman?color=brightgreen" alt="Repo size"></a>
+<a href="https://packagist.org/packages/kamu/aman"><img src="https://img.shields.io/packagist/l/kamu/aman?color=birghtgreen" alt="License"></a>
 </p>
 
 # Simple Profanity Filter with Regex
