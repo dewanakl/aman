@@ -76,8 +76,11 @@ class Aman
      */
     private function getFilterRegexp(string $string): string
     {
-        $replace = str_ireplace(array_keys($this->similar), array_values($this->similar), $string);
-        return '/' . $replace . '/iu';
+        $replace = strval(preg_replace_callback('/[a-z]/i', function (array $matches): string {
+            return strval($this->similar[strtolower($matches[0])] ?? $matches[0]);
+        }, $string));
+
+        return '/\b' . $replace . '\b/iu';
     }
 
     /**

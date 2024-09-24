@@ -19,6 +19,8 @@ class Test extends TestCase
     {
         $this->assertTrue($this->aman->check('This is a test with b@jIng4n word'));
 
+        $this->assertFalse($this->aman->check('This banjir word'));
+
         $this->assertFalse($this->aman->check('This is a clean test'));
     }
 
@@ -26,6 +28,9 @@ class Test extends TestCase
     {
         $maskedString = $this->aman->masking('This is a test with b@jIng4n word');
         $this->assertSame('This is a test with ******** word', $maskedString);
+
+        $maskedFalse = $this->aman->masking('This banjir word');
+        $this->assertSame('This banjir word', $maskedFalse);
 
         $maskedStringWithHash = $this->aman->masking('This is a test with b@jIng4n word', '#');
         $this->assertSame('This is a test with ######## word', $maskedStringWithHash);
@@ -35,6 +40,9 @@ class Test extends TestCase
     {
         $filteredString = $this->aman->filter('This is a test with b@jIng4n word');
         $this->assertSame('This is a test with  word', $filteredString);
+
+        $filteredString = $this->aman->filter('This banjir word');
+        $this->assertSame('This banjir word', $filteredString);
     }
 
     public function testWords(): void
@@ -44,6 +52,9 @@ class Test extends TestCase
 
         $filteredWords = $this->aman->words('This is a test with b@jIng4n and k3p4rat word');
         $this->assertSame(['b@jIng4n', 'k3p4rat'], $filteredWords);
+
+        $cleanWords = $this->aman->words('This banjir word');
+        $this->assertSame([], $cleanWords);
 
         $cleanWords = $this->aman->words('This is a clean test');
         $this->assertSame([], $cleanWords);
