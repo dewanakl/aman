@@ -38,3 +38,6 @@ jobs:
 
       - name: Execute type checking
         run: vendor/bin/phpstan
+
+      - name: Execute tests
+        run: vendor/bin/phpunit

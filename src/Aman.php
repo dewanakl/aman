@@ -50,21 +50,21 @@ class Aman
      *
      * @var Aman|null
      */
-    private static ?Aman $instance = null;
+    public static ?Aman $instance = null;
 
     /**
      * Whitelist items.
      *
      * @var array<int, string>
      */
-    private static array $whiteList = [];
+    public static array $whiteList = [];
 
     /**
      * Extended items.
      *
      * @var array<int, string>
      */
-    private static array $blockList = [];
+    public static array $blockList = [];
 
     /**
      * Init object.
