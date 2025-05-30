@@ -3,24 +3,16 @@
 <p align="center">
 <a href="https://php.net"><img src="https://img.shields.io/packagist/dependency-v/kamu/aman/php.svg?color=birghtgreen" alt="PHP Programming Language"></a>
 <a href="https://packagist.org/packages/kamu/aman"><img src="https://img.shields.io/packagist/dt/kamu/aman" alt="Total Downloads"></a>
-<a href="https://badge.dikit.biz.id"><img src="https://badge.dikit.biz.id/aman?label=views&color=brightgreen" alt="views"></a>
+<a href="https://cie.my.id"><img src="https://cie.my.id/aman?label=views&color=brightgreen" alt="views"></a>
 <a href="https://shields.io"><img src="https://img.shields.io/github/repo-size/dewanakl/aman?color=brightgreen" alt="Repo size"></a>
 <a href="https://packagist.org/packages/kamu/aman"><img src="https://img.shields.io/packagist/l/kamu/aman?color=birghtgreen" alt="License"></a>
 </p>
 
-# Simple Profanity Filter with Regex
+# 🤬 Simple Profanity Filter
 
-This is a simple project that filters out profane words using regex in PHP. It provides functions to check, filter, and remove unwanted words from a text using regex patterns that account for similar characters.
+This is a simple project that filters out profane words using regex in PHP. It provides functions to check, get, mask, and remove unwanted words from a text using regex patterns that account for similar characters.
 
-## Features
-
-- **Profanity Check**: Check if a string contains any unwanted words.
-- **Profanity Filter**: Remove unwanted words from a text.
-- **Profanity Masking**: Replace unwanted words with a masking character, such as `*`.
-
-## Installation
-
-To install this package, you can use Composer:
+## 📦 Installation
 
 1. Run the following command in your project directory:
 
@@ -28,21 +20,17 @@ To install this package, you can use Composer:
    composer require kamu/aman
    ```
 
-2. Add the list of words you want to filter in the db/lists.php file.
+2. How to Add Blocklist or Allowlist Words
 
     ```php
-    return [
-        'badword1',
-        'badword2',
-        // Add more words you want to filter
-    ];
+    // Add words to the blocklist
+    Aman::extend(['oke', 'safe']);
+
+    // Add words to the whitelist
+    Aman::allow(['oke', 'safe']);
     ```
 
-## Usage
-
-You can use the Aman class to filter profanity in your application.
-
-### Example Usage
+## 🛠️ Usage
 
 1. Check for Profane Words
 
@@ -83,14 +71,14 @@ You can use the Aman class to filter profanity in your application.
     print_r($badWords); // Output: ['bad', 'words']
     ```
 
-## Contributing
+## 🤝 Contributing
 
 I'm very open to those of you who want to contribute to the Aman!
 
-## Security Vulnerabilities
+## 🐞 Security Vulnerabilities
 
 If you find any security vulnerabilities in this Aman, please email DKL via [dewanakretarta29@gmail.com](mailto:dewanakretarta29@gmail.com).
 
-## License
+## 📜 License
 
 Aman is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

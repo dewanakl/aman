@@ -12,7 +12,16 @@ class Test extends TestCase
 
     protected function setUp(): void
     {
+        Aman::allow(['koruptor']);
+        Aman::extend(['selamat']);
+
         $this->aman = Aman::factory();
+    }
+
+    public function testAllowExtendList(): void
+    {
+        $this->assertTrue($this->aman->check('This is a test with selamat word'));
+        $this->assertFalse($this->aman->check('This is a test with koruptor word'));
     }
 
     public function testCheck(): void

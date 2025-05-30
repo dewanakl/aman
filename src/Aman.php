@@ -9,7 +9,7 @@ class Aman
      *
      * @var array<string, string> $similar
      */
-    private array $similar = [
+    private const similar = [
         'a' => '(a|a\.|a\-|4|@|Á|á|À|Â|à|Â|â|Ä|ä|Ã|ã|Å|å|α|Δ|Λ|λ)',
         'b' => '(b|b\.|b\-|8|\|3|ß|Β|β)',
         'c' => '(c|c\.|c\-|Ç|ç|¢|€|<|\(|{|©)',
@@ -50,7 +50,21 @@ class Aman
      *
      * @var Aman|null
      */
-    public static ?Aman $instance = null;
+    private static ?Aman $instance = null;
+
+    /**
+     * Whitelist items.
+     *
+     * @var array<int, string>
+     */
+    private static array $whiteList = [];
+
+    /**
+     * Extended items.
+     *
+     * @var array<int, string>
+     */
+    private static array $blockList = [];
 
     /**
      * Init object.
@@ -61,10 +75,13 @@ class Aman
     {
         $this->lists = [];
 
+        $white = array_unique(static::$whiteList);
         $lists = (array) @require __DIR__ . '/db/lists.php';
 
-        foreach ($lists as $list) {
-            $this->lists[] = $this->getFilterRegexp($list);
+        foreach (array_unique(array_merge($lists, static::$blockList)) as $list) {
+            if (!in_array($list, $white)) {
+                $this->lists[] = $this->getFilterRegexp($list);
+            }
         }
     }
 
@@ -77,10 +94,32 @@ class Aman
     private function getFilterRegexp(string $string): string
     {
         $replace = strval(preg_replace_callback('/[a-z]/i', function (array $matches): string {
-            return strval($this->similar[strtolower($matches[0])] ?? $matches[0]);
+            return strval(static::similar[strtolower($matches[0])] ?? $matches[0]);
         }, $string));
 
         return '/\b' . $replace . '\b/iu';
+    }
+
+    /**
+     * Set the allowlist of items.
+     *
+     * @param array<int, string> $data
+     * @return void
+     */
+    public static function allow(array $data): void
+    {
+        static::$whiteList = array_merge(static::$whiteList, $data);
+    }
+
+    /**
+     * Set the extended blocklist of items.
+     *
+     * @param array<int, string> $data
+     * @return void
+     */
+    public static function extend(array $data): void
+    {
+        static::$blockList = array_merge(static::$blockList, $data);
     }
 
     /**
