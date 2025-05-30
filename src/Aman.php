@@ -75,7 +75,7 @@ class Aman
     {
         $this->lists = [];
 
-        $lists = array_merge(array(require __DIR__ . '/db/lists.php'), static::$blockList);
+        $lists = array_merge((array) require __DIR__ . '/db/lists.php', static::$blockList);
 
         foreach (array_unique($lists) as $list) {
             if (!in_array($list, static::$whiteList)) {
