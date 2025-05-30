@@ -76,16 +76,14 @@ class Aman
         $db = (array) require __DIR__ . '/db/lists.php';
         $lists = array_diff(array_unique(array_merge($db, static::$blockList)), array_unique(static::$whiteList));
 
-        $this->lists = array_map(
-            function (string $str): string {
-                $replace = strval(preg_replace_callback('/[a-z]/i', function (array $matches): string {
-                    return strval(static::similar[strtolower($matches[0])] ?? $matches[0]);
-                }, $str));
+        $this->lists = array_values(array_map(function (string $str): string {
 
-                return '/\b' . $replace . '\b/iu';
-            },
-            $lists
-        );
+            $replace = strval(preg_replace_callback('/[a-z]/i', function (array $matches): string {
+                return strval(static::similar[strtolower($matches[0])] ?? $matches[0]);
+            }, $str));
+
+            return '/\b' . $replace . '\b/iu';
+        }, $lists));
     }
 
     /**
@@ -96,7 +94,7 @@ class Aman
      */
     public static function allow(array $data): void
     {
-        static::$whiteList = array_unique(array_merge(static::$whiteList, $data));
+        static::$whiteList = array_merge(static::$whiteList, $data);
     }
 
     /**
@@ -107,7 +105,7 @@ class Aman
      */
     public static function extend(array $data): void
     {
-        static::$blockList = array_unique(array_merge(static::$blockList, $data));
+        static::$blockList = array_merge(static::$blockList, $data);
     }
 
     /**
