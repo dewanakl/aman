@@ -9,7 +9,7 @@ class Aman
      *
      * @var array<string, string> $similar
      */
-    private const similar = [
+    public const similar = [
         'a' => '(a|a\.|a\-|4|@|Á|á|À|Â|à|Â|â|Ä|ä|Ã|ã|Å|å|α|Δ|Λ|λ)',
         'b' => '(b|b\.|b\-|8|\|3|ß|Β|β)',
         'c' => '(c|c\.|c\-|Ç|ç|¢|€|<|\(|{|©)',
