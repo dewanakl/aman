@@ -73,30 +73,19 @@ class Aman
      */
     public function __construct()
     {
-        $this->lists = [];
+        $db = (array) require __DIR__ . '/db/lists.php';
+        $lists = array_diff(array_unique(array_merge($db, static::$blockList)), array_unique(static::$whiteList));
 
-        $lists = array_merge((array) require __DIR__ . '/db/lists.php', static::$blockList);
+        $this->lists = array_map(
+            function (string $str): string {
+                $replace = strval(preg_replace_callback('/[a-z]/i', function (array $matches): string {
+                    return strval(static::similar[strtolower($matches[0])] ?? $matches[0]);
+                }, $str));
 
-        foreach (array_unique($lists) as $list) {
-            if (!in_array($list, static::$whiteList)) {
-                $this->lists[] = $this->getFilterRegexp($list);
-            }
-        }
-    }
-
-    /**
-     * From list to regex pattern.
-     *
-     * @param string $string
-     * @return string
-     */
-    private function getFilterRegexp(string $string): string
-    {
-        $replace = strval(preg_replace_callback('/[a-z]/i', function (array $matches): string {
-            return strval(static::similar[strtolower($matches[0])] ?? $matches[0]);
-        }, $string));
-
-        return '/\b' . $replace . '\b/iu';
+                return '/\b' . $replace . '\b/iu';
+            },
+            $lists
+        );
     }
 
     /**
