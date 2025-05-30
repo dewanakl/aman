@@ -75,11 +75,10 @@ class Aman
     {
         $this->lists = [];
 
-        $white = array_unique(static::$whiteList);
-        $lists = (array) @require __DIR__ . '/db/lists.php';
+        $lists = array_merge(array(require __DIR__ . '/db/lists.php'), static::$blockList);
 
-        foreach (array_unique(array_merge($lists, static::$blockList)) as $list) {
-            if (!in_array($list, $white)) {
+        foreach (array_unique($lists) as $list) {
+            if (!in_array($list, static::$whiteList)) {
                 $this->lists[] = $this->getFilterRegexp($list);
             }
         }
@@ -108,7 +107,7 @@ class Aman
      */
     public static function allow(array $data): void
     {
-        static::$whiteList = array_merge(static::$whiteList, $data);
+        static::$whiteList = array_unique(array_merge(static::$whiteList, $data));
     }
 
     /**
@@ -119,7 +118,7 @@ class Aman
      */
     public static function extend(array $data): void
     {
-        static::$blockList = array_merge(static::$blockList, $data);
+        static::$blockList = array_unique(array_merge(static::$blockList, $data));
     }
 
     /**
