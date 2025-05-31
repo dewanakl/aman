@@ -78,12 +78,12 @@ class Aman
 
         $this->lists = array_values(array_map(function (string $str): string {
 
-            $replace = strval(preg_replace_callback('/[a-z]/i', function (array $matches): string {
-                return strval(static::similar[strtolower($matches[0])] ?? $matches[0]);
+            $replace = strval(preg_replace_callback('/[a-z]/i', function (array $mats): string {
+                return strval(static::similar[strtolower($mats[0])] ?? $mats[0]);
             }, $str));
 
             return '/\b' . $replace . '\b/iu';
-        }, $lists));
+        }, array_values($lists)));
     }
 
     /**
