@@ -79,7 +79,7 @@ class Aman
         $this->lists = array_values(array_map(function (string $str): string {
 
             $replace = strval(preg_replace_callback('/[a-z]/i', function (array $mats): string {
-                return strval(static::similar[strtolower($mats[0])] ?? $mats[0]);
+                return strval(static::similar[strtolower(strval($mats[0]))] ?? $mats[0]);
             }, $str));
 
             return '/\b' . $replace . '\b/iu';
@@ -125,13 +125,13 @@ class Aman
     /**
      * Check if contains.
      *
-     * @param string $string
+     * @param string $str
      * @return bool
      */
-    public function check(string $string): bool
+    public function check(string $str): bool
     {
         foreach ($this->lists as $pattern) {
-            if (preg_match($pattern, $string)) {
+            if (preg_match($pattern, $str)) {
                 return true;
             }
         }
@@ -142,43 +142,40 @@ class Aman
     /**
      * Mask contains word.
      *
-     * @param string $string
+     * @param string $str
      * @param string $masking
      * @return string
      */
-    public function masking(string $string, string $masking = '*'): string
+    public function masking(string $str, string $masking = '*'): string
     {
         return strval(preg_replace_callback($this->lists, function (array $words) use ($masking): string {
-            return str_repeat($masking, strlen($words[0]));
-        }, $string));
+            return str_repeat($masking, strlen(strval($words[0])));
+        }, $str));
     }
 
     /**
      * Filter and remove if contains.
      *
-     * @param string $string
+     * @param string $str
      * @return string
      */
-    public function filter(string $string): string
+    public function filter(string $str): string
     {
-        return strval(preg_replace_callback($this->lists, function (): string {
-            return '';
-        }, $string));
+        return strval(preg_replace_callback($this->lists, fn(): string => '', $str));
     }
 
     /**
      * Get from string.
      *
-     * @param string $string
+     * @param string $str
      * @return array<int, string>
      */
-    public function words(string $string): array
+    public function words(string $str): array
     {
         $lists = [];
-        preg_replace_callback($this->lists, function (array $words) use (&$lists): string {
-            $lists[] = $words[0];
-            return $words[0];
-        }, $string);
+        preg_replace_callback($this->lists, function (array $mats) use (&$lists): void {
+            $lists[] = strval($mats[0]);
+        }, $str);
 
         return $lists;
     }
