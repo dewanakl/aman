@@ -173,8 +173,10 @@ class Aman
     public function words(string $str): array
     {
         $lists = [];
-        preg_replace_callback($this->lists, function (array $mats) use (&$lists): void {
-            $lists[] = strval($mats[0]);
+        preg_replace_callback($this->lists, function (array $mats) use (&$lists): string {
+            $result = strval($mats[0]);
+            $lists[] = $result;
+            return $result;
         }, $str);
 
         return $lists;
