@@ -1,11 +1,11 @@
 <p align="center"><img src="https://raw.githubusercontent.com/dewanakl/aman/main/img/aman.png" width="200" alt="aman"></p>
 
 <p align="center">
-<a href="https://php.net"><img src="https://img.shields.io/packagist/dependency-v/kamu/aman/php.svg?color=birghtgreen" alt="PHP Programming Language"></a>
+<a href="https://php.net"><img src="https://img.shields.io/packagist/dependency-v/kamu/aman/php.svg?color=brightgreen" alt="PHP Programming Language"></a>
 <a href="https://packagist.org/packages/kamu/aman"><img src="https://img.shields.io/packagist/dt/kamu/aman" alt="Total Downloads"></a>
 <a href="https://cie.my.id"><img src="https://cie.my.id/aman?label=views&color=brightgreen" alt="views"></a>
 <a href="https://shields.io"><img src="https://img.shields.io/github/repo-size/dewanakl/aman?color=brightgreen" alt="Repo size"></a>
-<a href="https://packagist.org/packages/kamu/aman"><img src="https://img.shields.io/packagist/l/kamu/aman?color=birghtgreen" alt="License"></a>
+<a href="https://packagist.org/packages/kamu/aman"><img src="https://img.shields.io/packagist/l/kamu/aman?color=brightgreen" alt="License"></a>
 </p>
 
 # 🤬 Simple Profanity Filter
